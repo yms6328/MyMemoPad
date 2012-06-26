@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MyMemoPadActivity!</string>
+    <string name="app_name">MyMemoPad</string>
+    <string name="create_db">Create Database</string>
+    <string name="sorting_date">Sort by date</string>
+    <string name="sorting_title">Sort by title</string>
+    <string name="empty_list">Empty List</string>
+    <string name="add_memo">Add</string>
+    <string name="check_memo">Check</string>
+</resources>

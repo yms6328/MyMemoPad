@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_add"
+        android:icon="@drawable/ics_new"
+        android:title="@string/add_memo"
+        android:showAsAction="ifRoom|withText">
+    </item>
+
+    <item
+        android:id="@+id/menu_check"
+        android:title="@string/check_memo"
+        android:icon="@drawable/ics_check"
+        android:showAsAction="ifRoom|withText">
+    </item>
+
+    <item
+        android:id="@+id/menu_sort_date"
+        android:title="@string/sorting_date">
+    </item>
+
+    <item
+        android:id="@+id/menu_sort_title"
+        android:title="@string/sorting_title">
+    </item>
+</menu>
