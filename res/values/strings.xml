@@ -3,10 +3,16 @@
 
     <string name="hello">Hello World, MyMemoPadActivity!</string>
     <string name="app_name">MyMemoPad</string>
+    <string name="actionbar_title">Memo List</string>
     <string name="create_db">Create Database</string>
     <string name="sorting_date">Sort by date</string>
     <string name="sorting_title">Sort by title</string>
     <string name="empty_list">Empty List</string>
     <string name="add_memo">Add</string>
     <string name="check_memo">Check</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_edit">Edit</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_memo">Write Memo</string>
+    <string name="edit_label">Edit Memo</string>
 </resources>

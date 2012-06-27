@@ -15,10 +15,13 @@
             android:theme="@style/LightTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WriteMemoActivity"
+            android:label="@string/edit_label"
+            android:theme="@style/LightTheme"/>
     </application>
 
 </manifest>
