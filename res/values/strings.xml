@@ -15,4 +15,6 @@
     <string name="hint_title">Title</string>
     <string name="hint_memo">Write Memo</string>
     <string name="edit_label">Edit Memo</string>
+    <string name="view_label">View Memo</string>
+    <string name="no_title">제목 없음</string>
 </resources>

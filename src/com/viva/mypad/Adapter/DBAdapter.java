@@ -26,31 +26,39 @@ public class DBAdapter
     {
         mDBHelper = new DBHelper(mCtx);
         mDB = mDBHelper.getWritableDatabase();
+        Log.e("MYMEMOPAD-----", "" + mDB.getVersion());
         return this;
     }
 
     public void close()
     {
         mDB.close();
+        if(mDBHelper != null)
+        {
+            mDBHelper.close();
+        }
+
     }
 
-    public long insertMemo(String title, String contents, String date)
+    public long insertMemo(String title, String contents, String date, int isImportant)
     {
         Log.e("MYMEMOPAD------", title + ", " + contents + ", " + date);
         ContentValues values = new ContentValues();
-        values.put(MemoConst.TITLE, title);
-        values.put(MemoConst.CONTENTS, contents);
-        values.put(MemoConst.DATE, date);
+        values.put(MemoConst.COL_TITLE, title);
+        values.put(MemoConst.COL_CONTENTS, contents);
+        values.put(MemoConst.COL_DATE, date);
+        values.put(MemoConst.COL_IMPORTANT, isImportant);
 
         return mDB.insert(MemoConst.TABLE_NAME, null, values);
     }
 
-    public boolean updateMemo(long id, String title, String contents)
+    public boolean updateMemo(long id, String title, String contents, int isImportant)
     {
         ContentValues values = new ContentValues();
-        values.put(MemoConst.TITLE, title);
-        values.put(MemoConst.CONTENTS, contents);
-        values.put(MemoConst.DATE, Util.getNowDateTime());
+        values.put(MemoConst.COL_TITLE, title);
+        values.put(MemoConst.COL_CONTENTS, contents);
+        values.put(MemoConst.COL_DATE, Util.getNowDateTime());
+        values.put(MemoConst.COL_IMPORTANT, isImportant);
 
         return mDB.update(MemoConst.TABLE_NAME, values, "_id=" + id, null) > 0;
     }

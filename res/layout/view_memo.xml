@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="16dp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/viewImportant"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ics_not_important"
+            android:contentDescription="@string/menu_delete"
+            android:layout_marginRight="10dp"
+            android:focusable="false" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="8dip"
+        android:layout_marginBottom="10dip"
+        android:background="#cccccc" />
+
+    <TextView
+        android:id="@+id/memoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+</LinearLayout>

@@ -1,31 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" android:padding="16dp">
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical" >
 
-    <CheckBox
-        android:id="@+id/memoCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"/>
+    <Button
+        android:id="@+id/importantButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ics_not_important"
+        android:contentDescription="@string/menu_delete"
+        android:layout_marginRight="16dp"
+        android:focusable="false" />
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/textLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/memoCheckBox"
-        android:layout_alignBottom="@+id/memoCheckBox"
-        android:layout_toRightOf="@+id/memoCheckBox"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/dateTextView"
+    <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="2dp"
+        android:gravity="right" >
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ics_edit"
+            android:contentDescription="@string/menu_edit"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ics_discard"
+            android:contentDescription="@string/menu_delete"
+            android:layout_marginRight="4dp"
+            android:focusable="false" />
+
+        <CheckBox
+            android:id="@+id/memoCheckBox"
+            android:layout_marginLeft="10dp"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

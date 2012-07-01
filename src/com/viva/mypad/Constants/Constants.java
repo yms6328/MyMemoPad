@@ -16,13 +16,13 @@ public final class Constants implements BaseColumns
             ;
         }
 
-        public static final String DB_NAME = "simplememopad.db";
-        public static final int DB_VER = 1;
+        public static final String DB_NAME = "mymemopad.db";
+        public static final int DB_VER = 2;
 
-        public static final String TABLE_NAME = "memo";
-        public static final String TITLE = "title";
-        public static final String CONTENTS = "contents";
-        public static final String DATE = "date";
-        public static final String LAST_MOD = "last_modify";
+        public static final String TABLE_NAME = "mymemo";
+        public static final String COL_TITLE = "title";
+        public static final String COL_CONTENTS = "contents";
+        public static final String COL_DATE = "date";
+        public static final String COL_IMPORTANT = "important";
     }
 }

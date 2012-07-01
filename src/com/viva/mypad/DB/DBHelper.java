@@ -20,9 +20,10 @@ public class DBHelper extends SQLiteOpenHelper
     {
         db.execSQL("CREATE TABLE " + MemoConst.TABLE_NAME + "(" 
                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + MemoConst.TITLE + " TEXT, "
-                    + MemoConst.CONTENTS + " TEXT, "
-                    + MemoConst.DATE + " TEXT);");
+                    + MemoConst.COL_TITLE + " TEXT, "
+                    + MemoConst.COL_CONTENTS + " TEXT, "
+                    + MemoConst.COL_DATE + " TEXT, "
+                    + MemoConst.COL_IMPORTANT + " INTEGER);");
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

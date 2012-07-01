@@ -22,6 +22,10 @@
             android:name=".WriteMemoActivity"
             android:label="@string/edit_label"
             android:theme="@style/LightTheme"/>
+        <activity
+            android:name=".ViewMemoActivity"
+            android:label="@string/view_label"
+            android:theme="@style/LightTheme"/>
     </application>
 
 </manifest>

@@ -7,10 +7,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,20 +22,22 @@ import com.viva.mypad.Adapter.DBAdapter;
 import com.viva.mypad.Adapter.MemoArrayAdapter;
 import com.viva.mypad.Item.MemoItem;
 
-public class MyMemoPadActivity extends Activity
+public class MyMemoPadActivity extends Activity implements OnItemClickListener
 {
-    private final String TAG = "MYMEMOPAD-----------";
+    private String TAG = "MEMOPAD";
+    private final int UPDATE_MESSAGE = 2;
     private final int INSERT_OK = 0;
     private DBAdapter mDbAdapter;
     private ListView mMemoListView;
     private ArrayList<MemoItem> mMemoList;
     private MemoArrayAdapter mMemoListAdapter;
+    private TextView mEmptyView;
+    private boolean mIsChecked = false;
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Log.e(TAG, "onCreate");
 
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(this.getResources().getString(R.string.actionbar_title));
@@ -39,41 +45,99 @@ public class MyMemoPadActivity extends Activity
         mDbAdapter = new DBAdapter(this);
         mDbAdapter.open();
 
+        mMemoList = new ArrayList<MemoItem>();
         mMemoListView = (ListView)findViewById(R.id.note_list_view);
-        TextView emptyView = (TextView)findViewById(R.id.empty);
+        mMemoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mMemoListAdapter = new MemoArrayAdapter(this, mMemoList, mDbAdapter);
+        mEmptyView = (TextView)findViewById(R.id.empty);
 
-        mMemoList = loadData();
-        if(mMemoList == null)
+        loadData();
+        if(mMemoList.size() == 0)
         {
-            mMemoListView.setEmptyView(emptyView);
+            mMemoListView.setEmptyView(mEmptyView);
         }
         else
         {
-            mMemoListAdapter = new MemoArrayAdapter(this, mMemoList);
+            mEmptyView.setVisibility(View.GONE);
             mMemoListView.setAdapter(mMemoListAdapter);
-            emptyView.setVisibility(View.GONE);
         }
+
+        mMemoListView.setOnItemClickListener(this);
     }
 
-    public void onResume()
+    protected void onDestroy()
     {
-        super.onResume();
-        Log.e(TAG, "ONRESUME");
-    }
-
-    public ArrayList<MemoItem> loadData()
-    {
-        
-        Cursor cursor = mDbAdapter.getAllMemo();
-        ArrayList<MemoItem> memoList = new ArrayList<MemoItem>();
-
-        cursor.moveToFirst();
-        while(cursor.moveToNext())
+        super.onDestroy();
+        if (mDbAdapter != null)
         {
-            memoList.add(new MemoItem(cursor.getString(1), cursor.getString(3)));
+        	mDbAdapter.close();
+        }
+    }
+
+    private Handler mHandler = new Handler()
+    { 
+        public void handleMessage(Message msg)
+        {  
+            if(msg.what == UPDATE_MESSAGE)
+            {
+                mMemoListAdapter.notifyDataSetChanged();
+            } 
+        } 
+    };
+
+    public void loadData()
+    {
+        mMemoList.removeAll(mMemoList);
+        Cursor cursor = mDbAdapter.getAllMemo();
+        String[] split = null;
+        cursor.moveToFirst();
+
+        if(cursor.getCount() == 1)
+        {
+            split = cursor.getString(3).split(" ");
+            String title = cursor.getString(1);
+
+            if(title.equals("") && !cursor.getString(3).equals(""))
+            {
+                title = cursor.getString(2).substring(0, 5);
+            }
+            else if(title.equals("") && cursor.getString(3).equals(""))
+            {
+                title = getResources().getString(R.string.no_title);
+            }
+
+            mMemoList.add(new MemoItem(cursor.getLong(0), title, split[0]));
         }
 
-        return memoList;
+        if(cursor.getCount() > 1)
+        {
+            while(cursor.moveToNext())
+            {
+                split = cursor.getString(3).split(" ");
+                String title = cursor.getString(1);
+
+                if(title.equals("") && !cursor.getString(2).equals(""))
+                {
+                    if(cursor.getString(2).length() > 7)
+                    {
+                        title = cursor.getString(2).substring(0, 7) + "...";
+                    }
+                    else
+                    {
+                        title = cursor.getString(2);
+                    }
+                }
+                else if(title.equals("") && cursor.getString(2).equals(""))
+                {
+                    title = getResources().getString(R.string.no_title);
+                }
+
+                Log.e(TAG, "memoid :" + cursor.getLong(0));
+                mMemoList.add(new MemoItem(cursor.getLong(0), title, split[0]));
+            }
+        }
+
+        cursor.close();
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
@@ -89,6 +153,11 @@ public class MyMemoPadActivity extends Activity
             case R.id.menu_add:
                 startActivityForResult(new Intent(this, WriteMemoActivity.class), INSERT_OK);
             break;
+            case R.id.menu_check:
+                if(mIsChecked) mIsChecked = false;
+                else mIsChecked = true;
+                mMemoListAdapter.setCheckBoxState(mIsChecked);
+            break;
         }
         return true;
     }
@@ -99,14 +168,16 @@ public class MyMemoPadActivity extends Activity
         switch(requestCode)
         {
             case INSERT_OK:
-            	Log.e(TAG, "INSERT_OK");
+                loadData();
+                mHandler.sendEmptyMessage(UPDATE_MESSAGE);
             break;
         }
     }
 
-    public void onDestroy()
+    public void onItemClick(AdapterView<?> parent, View v, int position, long id)
     {
-        super.onDestroy();
-        mDbAdapter.close();
+        Intent i = new Intent(this, ViewMemoActivity.class);
+        i.putExtra("memoid", mMemoList.get(position).getMemoId());
+        startActivity(i);
     }
 }

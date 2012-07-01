@@ -2,7 +2,6 @@ package com.viva.mypad;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -45,7 +44,7 @@ public class WriteMemoActivity extends Activity
         switch(item.getItemId())
         {
             case R.id.menu_save:
-                mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow);
+                mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow, 0);
                 this.setResult(RESULT_OK, null);
                 this.finish();
             break;

@@ -20,26 +20,36 @@ public final class R {
         public static final int ics_rate_important=0x7f020006;
         public static final int ics_save=0x7f020007;
         public static final int ics_share=0x7f020008;
+        public static final int small_delete=0x7f020009;
+        public static final int small_edit=0x7f02000a;
     }
     public static final class id {
+        public static final int buttonLayout=0x7f070006;
         public static final int dateTextView=0x7f070004;
-        public static final int dateView=0x7f070006;
-        public static final int editContent=0x7f070007;
-        public static final int editTitle=0x7f070005;
+        public static final int dateView=0x7f07000a;
+        public static final int deleteButton=0x7f070008;
+        public static final int editButton=0x7f070007;
+        public static final int editContent=0x7f07000e;
+        public static final int editTitle=0x7f07000d;
         public static final int empty=0x7f070001;
-        public static final int memoCheckBox=0x7f070002;
-        public static final int menu_add=0x7f070008;
-        public static final int menu_check=0x7f070009;
-        public static final int menu_save=0x7f07000c;
-        public static final int menu_sort_date=0x7f07000a;
-        public static final int menu_sort_title=0x7f07000b;
+        public static final int importantButton=0x7f070002;
+        public static final int memoCheckBox=0x7f070009;
+        public static final int memoView=0x7f07000c;
+        public static final int menu_add=0x7f07000f;
+        public static final int menu_check=0x7f070010;
+        public static final int menu_save=0x7f070013;
+        public static final int menu_sort_date=0x7f070011;
+        public static final int menu_sort_title=0x7f070012;
         public static final int note_list_view=0x7f070000;
-        public static final int titleTextView=0x7f070003;
+        public static final int textLayout=0x7f070003;
+        public static final int titleTextView=0x7f070005;
+        public static final int viewImportant=0x7f07000b;
     }
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int row_layout=0x7f030001;
-        public static final int write_memo=0x7f030002;
+        public static final int view_memo=0x7f030002;
+        public static final int write_memo=0x7f030003;
     }
     public static final class menu {
         public static final int main_menu=0x7f060000;
@@ -58,8 +68,10 @@ public final class R {
         public static final int hint_title=0x7f04000b;
         public static final int menu_delete=0x7f040009;
         public static final int menu_edit=0x7f04000a;
+        public static final int no_title=0x7f04000f;
         public static final int sorting_date=0x7f040004;
         public static final int sorting_title=0x7f040005;
+        public static final int view_label=0x7f04000e;
     }
     public static final class style {
         public static final int LightTheme=0x7f050000;
