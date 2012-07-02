@@ -12,38 +12,45 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int ics_check=0x7f020001;
-        public static final int ics_discard=0x7f020002;
-        public static final int ics_edit=0x7f020003;
-        public static final int ics_new=0x7f020004;
-        public static final int ics_not_important=0x7f020005;
-        public static final int ics_rate_important=0x7f020006;
-        public static final int ics_save=0x7f020007;
-        public static final int ics_share=0x7f020008;
-        public static final int small_delete=0x7f020009;
-        public static final int small_edit=0x7f02000a;
+        public static final int ic_launcher_copy=0x7f020001;
+        public static final int ics_check=0x7f020002;
+        public static final int ics_discard=0x7f020003;
+        public static final int ics_edit=0x7f020004;
+        public static final int ics_menu_discard=0x7f020005;
+        public static final int ics_menu_edit=0x7f020006;
+        public static final int ics_new=0x7f020007;
+        public static final int ics_not_important=0x7f020008;
+        public static final int ics_rate_important=0x7f020009;
+        public static final int ics_save=0x7f02000a;
+        public static final int ics_share=0x7f02000b;
+        public static final int small_delete=0x7f02000c;
+        public static final int small_edit=0x7f02000d;
     }
     public static final class id {
         public static final int buttonLayout=0x7f070006;
         public static final int dateTextView=0x7f070004;
-        public static final int dateView=0x7f07000a;
+        public static final int dateView=0x7f070009;
         public static final int deleteButton=0x7f070008;
         public static final int editButton=0x7f070007;
-        public static final int editContent=0x7f07000e;
-        public static final int editTitle=0x7f07000d;
+        public static final int editContent=0x7f07000d;
+        public static final int editTitle=0x7f07000c;
         public static final int empty=0x7f070001;
         public static final int importantButton=0x7f070002;
-        public static final int memoCheckBox=0x7f070009;
-        public static final int memoView=0x7f07000c;
-        public static final int menu_add=0x7f07000f;
-        public static final int menu_check=0x7f070010;
-        public static final int menu_save=0x7f070013;
-        public static final int menu_sort_date=0x7f070011;
-        public static final int menu_sort_title=0x7f070012;
+        public static final int memoView=0x7f07000b;
+        public static final int menu_add=0x7f07000e;
+        public static final int menu_delete=0x7f070015;
+        public static final int menu_delete_all_memo=0x7f070013;
+        public static final int menu_edit=0x7f070014;
+        public static final int menu_save=0x7f070017;
+        public static final int menu_setting=0x7f070012;
+        public static final int menu_share=0x7f070016;
+        public static final int menu_sort_date=0x7f070010;
+        public static final int menu_sort_important=0x7f07000f;
+        public static final int menu_sort_title=0x7f070011;
         public static final int note_list_view=0x7f070000;
         public static final int textLayout=0x7f070003;
         public static final int titleTextView=0x7f070005;
-        public static final int viewImportant=0x7f07000b;
+        public static final int viewImportant=0x7f07000a;
     }
     public static final class layout {
         public static final int main=0x7f030000;
@@ -53,25 +60,37 @@ public final class R {
     }
     public static final class menu {
         public static final int main_menu=0x7f060000;
-        public static final int write_menu=0x7f060001;
+        public static final int view_menu=0x7f060001;
+        public static final int write_menu=0x7f060002;
     }
     public static final class string {
         public static final int actionbar_title=0x7f040002;
-        public static final int add_memo=0x7f040007;
+        public static final int add_memo=0x7f04000a;
+        public static final int alert_delete_all_message=0x7f040015;
+        public static final int alert_delete_cancel=0x7f040018;
+        public static final int alert_delete_confirm=0x7f040017;
+        public static final int alert_delete_message=0x7f040016;
+        public static final int alert_delete_title=0x7f040014;
         public static final int app_name=0x7f040001;
-        public static final int check_memo=0x7f040008;
+        public static final int check_memo=0x7f04000b;
         public static final int create_db=0x7f040003;
-        public static final int edit_label=0x7f04000d;
-        public static final int empty_list=0x7f040006;
+        public static final int delete_all=0x7f040008;
+        public static final int edit_label=0x7f040010;
+        public static final int empty_list=0x7f040009;
         public static final int hello=0x7f040000;
-        public static final int hint_memo=0x7f04000c;
-        public static final int hint_title=0x7f04000b;
-        public static final int menu_delete=0x7f040009;
-        public static final int menu_edit=0x7f04000a;
-        public static final int no_title=0x7f04000f;
-        public static final int sorting_date=0x7f040004;
-        public static final int sorting_title=0x7f040005;
-        public static final int view_label=0x7f04000e;
+        public static final int hint_memo=0x7f04000f;
+        public static final int hint_title=0x7f04000e;
+        public static final int menu_delete=0x7f04000c;
+        public static final int menu_edit=0x7f04000d;
+        public static final int menu_share=0x7f040013;
+        public static final int no_title=0x7f040012;
+        public static final int setting=0x7f040007;
+        public static final int share_message=0x7f04001a;
+        public static final int share_title=0x7f040019;
+        public static final int sorting_date=0x7f040005;
+        public static final int sorting_important=0x7f040004;
+        public static final int sorting_title=0x7f040006;
+        public static final int view_label=0x7f040011;
     }
     public static final class style {
         public static final int LightTheme=0x7f050000;

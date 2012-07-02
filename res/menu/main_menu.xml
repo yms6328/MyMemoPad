@@ -8,10 +8,8 @@
     </item>
 
     <item
-        android:id="@+id/menu_check"
-        android:title="@string/check_memo"
-        android:icon="@drawable/ics_check"
-        android:showAsAction="ifRoom|withText">
+        android:id="@+id/menu_sort_important"
+        android:title="@string/sorting_important">
     </item>
 
     <item
@@ -22,5 +20,15 @@
     <item
         android:id="@+id/menu_sort_title"
         android:title="@string/sorting_title">
+    </item>
+
+    <item
+        android:id="@+id/menu_setting"
+        android:title="@string/setting">
+    </item>
+
+    <item
+        android:id="@+id/menu_delete_all_memo"
+        android:title="@string/delete_all">
     </item>
 </menu>

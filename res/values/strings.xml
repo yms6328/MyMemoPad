@@ -5,8 +5,11 @@
     <string name="app_name">MyMemoPad</string>
     <string name="actionbar_title">Memo List</string>
     <string name="create_db">Create Database</string>
+    <string name="sorting_important">Sort by Important</string>
     <string name="sorting_date">Sort by date</string>
     <string name="sorting_title">Sort by title</string>
+    <string name="setting">Setting</string>
+    <string name="delete_all">Delete All Memo</string>
     <string name="empty_list">Empty List</string>
     <string name="add_memo">Add</string>
     <string name="check_memo">Check</string>
@@ -17,4 +20,14 @@
     <string name="edit_label">Edit Memo</string>
     <string name="view_label">View Memo</string>
     <string name="no_title">제목 없음</string>
+    <string name="menu_share">Share</string>
+
+    <string name="alert_delete_title">Delete All?</string>
+    <string name="alert_delete_all_message">All memo will be deleted.</string>
+    <string name="alert_delete_message">One memo will be deleted.</string>
+    <string name="alert_delete_confirm">Delete</string>
+    <string name="alert_delete_cancel">Cancel</string>
+
+    <string name="share_title">[MyMemopad]</string>
+    <string name="share_message">- From MyMemopad -</string>
 </resources>

@@ -63,9 +63,21 @@ public class DBAdapter
         return mDB.update(MemoConst.TABLE_NAME, values, "_id=" + id, null) > 0;
     }
 
+    public boolean updateImportant(long id, int isImportant)
+    {
+        ContentValues values = new ContentValues();
+        values.put(MemoConst.COL_IMPORTANT, isImportant);
+        return mDB.update(MemoConst.TABLE_NAME, values, "_id=" + id, null) > 0;
+    }
+
     public boolean deleteMemo(long id)
     {
         return mDB.delete(MemoConst.TABLE_NAME, "_id=" + id, null) > 0;
+    }
+
+    public boolean deleteAllMemo()
+    {
+        return mDB.delete(MemoConst.TABLE_NAME, null, null) > 0;
     }
 
     public Cursor getAllMemo()

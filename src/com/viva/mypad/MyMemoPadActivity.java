@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,15 +25,14 @@ import com.viva.mypad.Item.MemoItem;
 
 public class MyMemoPadActivity extends Activity implements OnItemClickListener
 {
-    private String TAG = "MEMOPAD";
-    private final int UPDATE_MESSAGE = 2;
     private final int INSERT_OK = 0;
+    private final int UPDATE_MESSAGE = 100;
+
     private DBAdapter mDbAdapter;
     private ListView mMemoListView;
     private ArrayList<MemoItem> mMemoList;
     private MemoArrayAdapter mMemoListAdapter;
     private TextView mEmptyView;
-    private boolean mIsChecked = false;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -65,12 +65,19 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
         mMemoListView.setOnItemClickListener(this);
     }
 
+    public void onResume()
+    {
+        super.onResume();
+        loadData();
+        mHandler.sendEmptyMessage(UPDATE_MESSAGE);
+    }
+
     protected void onDestroy()
     {
         super.onDestroy();
         if (mDbAdapter != null)
         {
-        	mDbAdapter.close();
+            mDbAdapter.close();
         }
     }
 
@@ -89,51 +96,25 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
     {
         mMemoList.removeAll(mMemoList);
         Cursor cursor = mDbAdapter.getAllMemo();
-        String[] split = null;
         cursor.moveToFirst();
 
         if(cursor.getCount() == 1)
         {
-            split = cursor.getString(3).split(" ");
-            String title = cursor.getString(1);
-
-            if(title.equals("") && !cursor.getString(3).equals(""))
-            {
-                title = cursor.getString(2).substring(0, 5);
-            }
-            else if(title.equals("") && cursor.getString(3).equals(""))
-            {
-                title = getResources().getString(R.string.no_title);
-            }
-
-            mMemoList.add(new MemoItem(cursor.getLong(0), title, split[0]));
+            mMemoList.add(new MemoItem(cursor.getLong(0), 
+                                       getTitle(cursor.getString(1), cursor.getString(2)), 
+                                       getDateFromDateTime(cursor.getString(3)),
+                                       cursor.getInt(4)));
         }
 
         if(cursor.getCount() > 1)
         {
             while(cursor.moveToNext())
             {
-                split = cursor.getString(3).split(" ");
-                String title = cursor.getString(1);
-
-                if(title.equals("") && !cursor.getString(2).equals(""))
-                {
-                    if(cursor.getString(2).length() > 7)
-                    {
-                        title = cursor.getString(2).substring(0, 7) + "...";
-                    }
-                    else
-                    {
-                        title = cursor.getString(2);
-                    }
-                }
-                else if(title.equals("") && cursor.getString(2).equals(""))
-                {
-                    title = getResources().getString(R.string.no_title);
-                }
-
-                Log.e(TAG, "memoid :" + cursor.getLong(0));
-                mMemoList.add(new MemoItem(cursor.getLong(0), title, split[0]));
+                mMemoList.add(new MemoItem(cursor.getLong(0), 
+                                           getTitle(cursor.getString(1), 
+                                           cursor.getString(2)),
+                                           getDateFromDateTime(cursor.getString(3)),
+                                           cursor.getInt(4)));
             }
         }
 
@@ -148,15 +129,17 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
 
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        Intent intent;
         switch(item.getItemId())
         {
             case R.id.menu_add:
-                startActivityForResult(new Intent(this, WriteMemoActivity.class), INSERT_OK);
+                intent = new Intent(this, WriteMemoActivity.class);
+                intent.putExtra("editMode", 0);
+                startActivityForResult(intent, INSERT_OK);
             break;
-            case R.id.menu_check:
-                if(mIsChecked) mIsChecked = false;
-                else mIsChecked = true;
-                mMemoListAdapter.setCheckBoxState(mIsChecked);
+
+            case R.id.menu_delete_all_memo:
+                showDeleteAllDialog();
             break;
         }
         return true;
@@ -179,5 +162,54 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
         Intent i = new Intent(this, ViewMemoActivity.class);
         i.putExtra("memoid", mMemoList.get(position).getMemoId());
         startActivity(i);
+    }
+
+    public void showDeleteAllDialog()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(getResources().getString(R.string.alert_delete_title));
+        alert.setMessage(getResources().getString(R.string.alert_delete_all_message));
+
+        alert.setPositiveButton(getResources().getString(R.string.alert_delete_confirm), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                mDbAdapter.deleteAllMemo();
+                dialog.dismiss();
+                loadData();
+                mHandler.sendEmptyMessage(UPDATE_MESSAGE);
+            }
+        });
+
+        alert.setNegativeButton(getResources().getString(R.string.alert_delete_cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
+    }
+
+    private String getDateFromDateTime(String date)
+    {
+        return date.split(" ")[0];
+    }
+
+    private String getTitle(String dbTitle, String dbContent)
+    {
+        String title = dbTitle;
+        if(title.equals("") && !dbContent.equals(""))
+        {
+            if(dbContent.length() > 7)
+            {
+                title = dbContent.substring(0, 7) + "...";
+            }
+            else
+            {
+                title = dbContent;
+            }
+        }
+
+        return title;
     }
 }

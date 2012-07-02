@@ -4,12 +4,14 @@ public class MemoItem
 {
     private long mMemoId;
     private String mMemoTitle, mMemoDate;
+    private int mIsImportant;
 
-    public MemoItem(long id, String title, String date)
+    public MemoItem(long id, String title, String date, int important)
     {
         mMemoId = id;
         mMemoTitle = title;
         mMemoDate = date;
+        mIsImportant = important;
     }
 
     public long getMemoId()
@@ -25,5 +27,10 @@ public class MemoItem
     public String getMemoDate()
     {
         return mMemoDate;
+    }
+
+    public int getImportant()
+    {
+        return mIsImportant;
     }
 }
