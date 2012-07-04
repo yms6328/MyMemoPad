@@ -26,7 +26,6 @@ public class DBAdapter
     {
         mDBHelper = new DBHelper(mCtx);
         mDB = mDBHelper.getWritableDatabase();
-        Log.e("MYMEMOPAD-----", "" + mDB.getVersion());
         return this;
     }
 

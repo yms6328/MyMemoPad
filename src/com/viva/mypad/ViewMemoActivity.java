@@ -1,20 +1,20 @@
 package com.viva.mypad;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.viva.mypad.Adapter.DBAdapter;
 
-public class ViewMemoActivity extends Activity implements OnClickListener
+public class ViewMemoActivity extends SherlockActivity implements OnClickListener
 {
     private long mMemoId;
     private DBAdapter mDbAdapter;
@@ -32,7 +32,9 @@ public class ViewMemoActivity extends Activity implements OnClickListener
         mDbAdapter = new DBAdapter(this);
         mDbAdapter.open();
 
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
         mMemoId = getIntent().getExtras().getLong("memoid");
 
         TextView dateView = (TextView)findViewById(R.id.dateView);
@@ -83,7 +85,7 @@ public class ViewMemoActivity extends Activity implements OnClickListener
 
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.view_menu, menu);
+        getSupportMenuInflater().inflate(R.menu.view_menu, menu);
         return true;
     }
 
@@ -92,10 +94,17 @@ public class ViewMemoActivity extends Activity implements OnClickListener
         Intent intent = null;
         switch(item.getItemId())
         {
+            case android.R.id.home:
+                intent = new Intent(this, MyMemoPadActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            break;
+
             case R.id.menu_edit:
                 intent = new Intent(this, WriteMemoActivity.class);
                 intent.putExtra("editMode", 1);
                 intent.putExtra("memoid", mMemoId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 this.finish();
             break;
@@ -103,8 +112,8 @@ public class ViewMemoActivity extends Activity implements OnClickListener
             case R.id.menu_delete:
                 mDbAdapter.deleteMemo(mMemoId);
                 intent = new Intent(ViewMemoActivity.this, MyMemoPadActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                this.finish();
             break;
 
             case R.id.menu_share:

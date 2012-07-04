@@ -1,25 +1,34 @@
 package com.viva.mypad;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.viva.mypad.Adapter.DBAdapter;
 import com.viva.mypad.Util.Util;
 
-public class WriteMemoActivity extends Activity
+public class WriteMemoActivity extends SherlockActivity implements OnClickListener
 {
+    private ActionBar mActionBar;
     private String mNow;
     private TextView mDateView;
     private EditText mEditTitle, mEditContent;
+    private Button mImportantButton;
     private DBAdapter mDbAdapter;
     private int mIsEditMode;
     private long mMemoId;
+    private boolean mIsImportant;
+    private int mImportantNumber;
 
     public void onCreate(Bundle saveInstanceState)
     {
@@ -29,52 +38,125 @@ public class WriteMemoActivity extends Activity
         mDbAdapter = new DBAdapter(this);
         mDbAdapter.open();
 
+        mIsImportant = false;
+        mImportantNumber = 0;
+
+        mActionBar = getSupportActionBar();
+        mActionBar.setTitle(getResources().getString(R.string.hint_memo));
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
+
         mDateView = (TextView)findViewById(R.id.dateView);
+        mNow = Util.getNowDateTime();
+        mDateView.setText(mNow);
+
         mEditTitle = (EditText)findViewById(R.id.editTitle);
         mEditContent = (EditText)findViewById(R.id.editContent);
+        mEditContent.setSelection(0);
+
+        mImportantButton = (Button)findViewById(R.id.importantButton);
+        mImportantButton.setOnClickListener(this);
 
         mIsEditMode = getIntent().getIntExtra("editMode", 0);
         if(mIsEditMode == 1)
         {
             // edit mode
+            mActionBar.setTitle(getResources().getString(R.string.edit_label));
+            mEditContent.setSelection(mEditContent.length());
             mMemoId = getIntent().getLongExtra("memoid", 0);
             Cursor cursor = mDbAdapter.getMemo(mMemoId);
             mEditTitle.setText(cursor.getString(1));
             mEditContent.setText(cursor.getString(2));
+            if(cursor.getInt(4) == 1)
+            {
+                mIsImportant = true;
+                mImportantNumber = 1;
+                mImportantButton.setBackgroundResource(R.drawable.ics_rate_important);
+            }
+            cursor.close();
         }
+    }
 
-        mNow = Util.getNowDateTime();
-        mDateView.setText(mNow);
+    public void onDestroy()
+    {
+        super.onDestroy();
+        mDbAdapter.close();
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.write_menu, menu);
+        getSupportMenuInflater().inflate(R.menu.write_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        Intent intent = null;
         switch(item.getItemId())
         {
+            case android.R.id.home:
+                intent = new Intent(this, MyMemoPadActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            break;
+
             case R.id.menu_save:
-                if(mIsEditMode == 1)
+                if(checkIsEmpty())
                 {
-                    mDbAdapter.updateMemo(mMemoId, mEditTitle.getText().toString(), mEditContent.getText().toString(), 0);
+                    Toast.makeText(this, getResources().getString(R.string.warning), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    mMemoId = mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow, 0);
+                    saveMemo();
+                    intent = new Intent(this, ViewMemoActivity.class);
+                    intent.putExtra("memoid", mMemoId);
+                    startActivity(intent);
+                    this.finish();
                 }
-
-                //this.setResult(RESULT_OK, null);
-                mDbAdapter.close();
-                Intent intent = new Intent(this, ViewMemoActivity.class);
-                intent.putExtra("memoid", mMemoId);
-                startActivity(intent);
-                this.finish();
             break;
         }
+
         return true;
+    }
+
+    private void saveMemo()
+    {
+        if(mIsEditMode == 1)
+        {
+            mDbAdapter.updateMemo(mMemoId, mEditTitle.getText().toString(), mEditContent.getText().toString(), mImportantNumber);
+        }
+        else
+        {
+            mMemoId = mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow, 0);
+        }
+
+        //this.setResult(RESULT_OK, null);
+        mDbAdapter.close();
+    }
+
+    private boolean checkIsEmpty()
+    {
+        boolean isEmpty = false;
+        if(mEditTitle.getText().toString().matches("") && mEditContent.getText().toString().matches(""))
+        {
+            isEmpty = true;
+        }
+        return isEmpty;
+    }
+
+    public void onClick(View v)
+    {
+        if(mIsImportant)
+        {
+            mIsImportant = false;
+            mImportantNumber = 0;
+            v.setBackgroundResource(R.drawable.ics_not_important);
+        }
+        else
+        {
+            mIsImportant = true;
+            mImportantNumber = 1;
+            v.setBackgroundResource(R.drawable.ics_rate_important);
+        }
     }
 }

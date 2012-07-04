@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="16dp" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <TextView
             android:id="@+id/dateView"
@@ -32,14 +36,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_marginTop="8dip"
-        android:layout_marginBottom="14dip"
-        android:background="#cccccc" />
+        android:layout_marginBottom="18dip"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#cccccc"/>
 
     <TextView
         android:id="@+id/memoView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:lineSpacingExtra="8dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 </LinearLayout>

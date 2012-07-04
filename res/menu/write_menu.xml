@@ -6,4 +6,14 @@
         android:title="@string/add_memo"
         android:showAsAction="ifRoom|withText">
     </item>
+
+    <item
+        android:id="@+id/menu_setting"
+        android:title="@string/setting">
+    </item>
+
+    <item
+        android:id="@+id/menu_bug_report"
+        android:title="@string/menu_bug_report">
+    </item>
 </menu>

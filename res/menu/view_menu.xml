@@ -9,9 +9,7 @@
 
     <item
         android:id="@+id/menu_delete"
-        android:icon="@drawable/ics_menu_discard"
-        android:title="@string/menu_delete"
-        android:showAsAction="ifRoom|withText">
+        android:title="@string/menu_delete">
     </item>
 
     <item
@@ -22,5 +20,10 @@
     <item
         android:id="@+id/menu_setting"
         android:title="@string/setting">
+    </item>
+
+    <item
+        android:id="@+id/menu_bug_report"
+        android:title="@string/menu_bug_report">
     </item>
 </menu>

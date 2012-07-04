@@ -2,34 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/editTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="@string/hint_title"
+            android:nextFocusDown="@+id/editContent"
+            android:singleLine="true">
+            <requestFocus />
+        </EditText>
 
-    <EditText
-        android:id="@+id/editTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hint_title"
-        android:layout_marginBottom="16dp" >
-        <requestFocus />
-    </EditText>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" >
 
-    <TextView
-        android:id="@+id/dateView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_gravity="right"
-        android:layout_marginBottom="8dp"/>
+            <TextView
+                android:id="@+id/dateView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/editContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:hint="@string/hint_memo" />
+            <Button
+                android:id="@+id/importantButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/ics_not_important" />
 
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editContent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:inputType="textMultiLine"
+            android:hint="@string/hint_memo"
+            android:gravity="left|top"
+            android:imeOptions="actionDone"/>
 </LinearLayout>

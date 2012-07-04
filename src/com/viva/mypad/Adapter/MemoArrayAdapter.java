@@ -3,7 +3,6 @@ package com.viva.mypad.Adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.viva.mypad.R;
-import com.viva.mypad.WriteMemoActivity;
 import com.viva.mypad.Item.MemoItem;
 
 public class MemoArrayAdapter extends BaseAdapter
@@ -54,8 +52,6 @@ public class MemoArrayAdapter extends BaseAdapter
         TextView titleView = (TextView)convertView.findViewById(R.id.titleTextView);
         TextView dateView = (TextView)convertView.findViewById(R.id.dateTextView);
         Button importantButton = (Button)convertView.findViewById(R.id.importantButton);
-        Button editButton = (Button)convertView.findViewById(R.id.editButton);
-        Button deleteButton = (Button)convertView.findViewById(R.id.deleteButton);
 
         titleView.setText(mMemoList.get(position).getMemoTitle());
         dateView.setText(mMemoList.get(position).getMemoDate());
@@ -68,27 +64,6 @@ public class MemoArrayAdapter extends BaseAdapter
         {
         	importantButton.setBackgroundResource(R.drawable.ics_rate_important);
         }
-
-        editButton.setOnClickListener(new OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent i = new Intent(mContext, WriteMemoActivity.class);
-                i.putExtra("editMode", 1);
-                i.putExtra("memoid", mMemoList.get(position).getMemoId());
-                mContext.startActivity(i);
-            }
-        });
-
-        deleteButton.setOnClickListener(new OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                mDbAdapter.deleteMemo(mMemoList.get(position).getMemoId());
-                mMemoList.remove(position);
-                notifyDataSetChanged();
-            }
-        });
 
         importantButton.setOnClickListener(new OnClickListener()
         {

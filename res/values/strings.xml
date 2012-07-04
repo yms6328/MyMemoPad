@@ -5,6 +5,7 @@
     <string name="app_name">MyMemoPad</string>
     <string name="actionbar_title">Memo List</string>
     <string name="create_db">Create Database</string>
+    <string name="menu_sorting">Sorting</string>
     <string name="sorting_important">Sort by Important</string>
     <string name="sorting_date">Sort by date</string>
     <string name="sorting_title">Sort by title</string>
@@ -15,6 +16,7 @@
     <string name="check_memo">Check</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_edit">Edit</string>
+    <string name="menu_bug_report">Bug Report</string>
     <string name="hint_title">Title</string>
     <string name="hint_memo">Write Memo</string>
     <string name="edit_label">Edit Memo</string>
@@ -29,5 +31,13 @@
     <string name="alert_delete_cancel">Cancel</string>
 
     <string name="share_title">[MyMemopad]</string>
-    <string name="share_message">- From MyMemopad -</string>
+    <string name="share_message">(From MyMemopad)</string>
+
+    <string name="warning">제목 또는 메모 내용을 입력하세요.</string>
+    <string name="status_text">개의 메모</string>
+
+    <string name="setting_category">Bug Report</string>
+    <string name="setting_title">로그 수집 동의</string>
+    <string name="setting_summary_agree">동의함</string>
+    <string name="setting_summary_disagree">동의 안함</string>
 </resources>

@@ -3,21 +3,34 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#1a1a1a"
+        android:padding="8dp"
+        android:background="@drawable/pattern_bg"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#cccccc"/>
     <ListView
         android:id="@+id/note_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     </ListView>
 
     <TextView
         android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_vertical"
         android:gravity="center"
         android:text="@string/empty_list"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:textSize="18sp"/>
 
 </LinearLayout>

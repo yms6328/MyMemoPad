@@ -1,65 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:padding="12dp"
     android:gravity="center_vertical" >
+
+    <TableRow android:gravity="right" >
 
-    <Button
-        android:id="@+id/importantButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ics_not_important"
-        android:contentDescription="@string/menu_delete"
-        android:layout_marginRight="16dp"
-        android:focusable="false" />
-
-    <LinearLayout
-        android:id="@+id/textLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1" >
-
-        <TextView
-            android:id="@+id/dateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <Button
+            android:id="@+id/importantButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ics_not_important"
+            android:contentDescription="@string/menu_delete"
+            android:focusable="false" />
 
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buttonLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="2dp"
-        android:gravity="right" >
 
-        <Button
-            android:id="@+id/editButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/ics_edit"
-            android:contentDescription="@string/menu_edit"
-            android:focusable="false" />
-
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ics_discard"
-            android:contentDescription="@string/menu_delete"
-            android:layout_marginRight="4dp"
-            android:focusable="false" />
-    </LinearLayout>
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginRight="8dp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </TableRow>
+</TableLayout>

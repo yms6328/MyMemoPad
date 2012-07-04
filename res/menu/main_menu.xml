@@ -8,18 +8,13 @@
     </item>
 
     <item
-        android:id="@+id/menu_sort_important"
-        android:title="@string/sorting_important">
+        android:id="@+id/menu_sorting"
+        android:title="@string/menu_sorting">
     </item>
 
     <item
-        android:id="@+id/menu_sort_date"
-        android:title="@string/sorting_date">
-    </item>
-
-    <item
-        android:id="@+id/menu_sort_title"
-        android:title="@string/sorting_title">
+        android:id="@+id/menu_delete_all_memo"
+        android:title="@string/delete_all">
     </item>
 
     <item
@@ -28,7 +23,8 @@
     </item>
 
     <item
-        android:id="@+id/menu_delete_all_memo"
-        android:title="@string/delete_all">
+        android:id="@+id/menu_bug_report"
+        android:title="@string/menu_bug_report">
     </item>
+
 </menu>

@@ -2,8 +2,6 @@ package com.viva.mypad;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,35 +9,41 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.viva.mypad.Adapter.DBAdapter;
 import com.viva.mypad.Adapter.MemoArrayAdapter;
+import com.viva.mypad.Gesture.SwipeDetector;
 import com.viva.mypad.Item.MemoItem;
 
-public class MyMemoPadActivity extends Activity implements OnItemClickListener
+public class MyMemoPadActivity extends SherlockActivity implements OnItemClickListener
 {
     private final int INSERT_OK = 0;
     private final int UPDATE_MESSAGE = 100;
+    private final int DELETE_MESSAGE = 200;
 
     private DBAdapter mDbAdapter;
     private ListView mMemoListView;
     private ArrayList<MemoItem> mMemoList;
     private MemoArrayAdapter mMemoListAdapter;
     private TextView mEmptyView;
+    private TextView mStatusView;
+    private SwipeDetector mSwipeDetector;
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(this.getResources().getString(R.string.actionbar_title));
 
         mDbAdapter = new DBAdapter(this);
@@ -50,6 +54,8 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
         mMemoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mMemoListAdapter = new MemoArrayAdapter(this, mMemoList, mDbAdapter);
         mEmptyView = (TextView)findViewById(R.id.empty);
+        mStatusView = (TextView)findViewById(R.id.statusTextView);
+        mSwipeDetector = new SwipeDetector();
 
         loadData();
         if(mMemoList.size() == 0)
@@ -62,7 +68,9 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
             mMemoListView.setAdapter(mMemoListAdapter);
         }
 
+        mStatusView.setText(mMemoList.size() + getResources().getString(R.string.status_text));
         mMemoListView.setOnItemClickListener(this);
+        mMemoListView.setOnTouchListener(mSwipeDetector);
     }
 
     public void onResume()
@@ -85,10 +93,18 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
     { 
         public void handleMessage(Message msg)
         {  
-            if(msg.what == UPDATE_MESSAGE)
+            switch(msg.what)
             {
-                mMemoListAdapter.notifyDataSetChanged();
-            } 
+                case UPDATE_MESSAGE:
+                    mMemoListAdapter.notifyDataSetChanged();
+                    mMemoListView.setAdapter(mMemoListAdapter);
+                break;
+
+                case DELETE_MESSAGE:
+                    mMemoListAdapter.notifyDataSetChanged();
+                    mEmptyView.setVisibility(View.VISIBLE);
+                break;
+            }
         } 
     };
 
@@ -98,12 +114,12 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
         Cursor cursor = mDbAdapter.getAllMemo();
         cursor.moveToFirst();
 
-        if(cursor.getCount() == 1)
+        if(cursor.getCount() >= 1)
         {
             mMemoList.add(new MemoItem(cursor.getLong(0), 
-                                       getTitle(cursor.getString(1), cursor.getString(2)), 
-                                       getDateFromDateTime(cursor.getString(3)),
-                                       cursor.getInt(4)));
+                    getTitle(cursor.getString(1), cursor.getString(2)), 
+                    getDateFromDateTime(cursor.getString(3)),
+                    cursor.getInt(4)));
         }
 
         if(cursor.getCount() > 1)
@@ -118,12 +134,14 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
             }
         }
 
+        mStatusView.setText(mMemoList.size() + getResources().getString(R.string.status_text));
+
         cursor.close();
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getSupportMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -141,6 +159,10 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
             case R.id.menu_delete_all_memo:
                 showDeleteAllDialog();
             break;
+
+            case R.id.menu_setting:
+                intent = new Intent(this, SettingActivity.class);
+                startActivity(intent);
         }
         return true;
     }
@@ -151,17 +173,25 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
         switch(requestCode)
         {
             case INSERT_OK:
-                loadData();
-                mHandler.sendEmptyMessage(UPDATE_MESSAGE);
+                ;
             break;
         }
     }
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id)
     {
-        Intent i = new Intent(this, ViewMemoActivity.class);
-        i.putExtra("memoid", mMemoList.get(position).getMemoId());
-        startActivity(i);
+        if (mSwipeDetector.swipeDetected())
+        {
+            mDbAdapter.deleteMemo(mMemoList.get(position).getMemoId());
+            loadData();
+            mHandler.sendEmptyMessage(UPDATE_MESSAGE);
+        }
+        else
+        {
+            Intent i = new Intent(this, ViewMemoActivity.class);
+            i.putExtra("memoid", mMemoList.get(position).getMemoId());
+            startActivity(i);
+        }
     }
 
     public void showDeleteAllDialog()
@@ -176,7 +206,7 @@ public class MyMemoPadActivity extends Activity implements OnItemClickListener
                 mDbAdapter.deleteAllMemo();
                 dialog.dismiss();
                 loadData();
-                mHandler.sendEmptyMessage(UPDATE_MESSAGE);
+                mHandler.sendEmptyMessage(DELETE_MESSAGE);
             }
         });
 

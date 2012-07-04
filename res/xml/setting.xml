@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="@string/setting_category">
+        <CheckBoxPreference
+            android:key="log_collect"
+            android:title="@string/setting_title"
+            android:summary="@string/setting_summary_disagree">
+        </CheckBoxPreference>
+    </PreferenceCategory>
+</PreferenceScreen>
