@@ -9,6 +9,20 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
+
+        <receiver android:name=".MyMemoPadWidgetProvider" android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.viva.mypad.CLICK_NEXT" />
+                <action android:name="com.viva.mypad.CLICK_PREV" />
+                <action android:name="com.viva.mypad.ADDED_MEMO" />
+                <action android:name="com.viva.mypad.DELETED_MEMO" />
+                <action android:name="com.viva.mypad.DELETED_ALL_MEMO" />
+            </intent-filter>
+            <meta-data
+              android:name="android.appwidget.provider"
+              android:resource="@xml/mywidget" />
+        </receiver>
         <activity
             android:name=".MyMemoPadActivity"
             android:label="@string/app_name"

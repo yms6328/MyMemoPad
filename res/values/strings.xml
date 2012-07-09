@@ -40,4 +40,12 @@
     <string name="setting_title">로그 수집 동의</string>
     <string name="setting_summary_agree">동의함</string>
     <string name="setting_summary_disagree">동의 안함</string>
+
+    <string name="empty_memo_title">메모 없음</string>
+    <string name="empty_memo_content">메모를 추가해 주세요.</string>
+
+    <string name="last_memo">마지막 메모입니다.</string>
+    <string name="first_memo">첫 번째 메모입니다.</string>
+
+    <string name="saved">저장되었습니다.</string>
 </resources>

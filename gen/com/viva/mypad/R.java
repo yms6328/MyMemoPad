@@ -785,21 +785,25 @@ containing a value of this type.
         public static final int abs__tab_unselected_pressed_holo=0x7f020054;
         public static final int ic_launcher=0x7f020055;
         public static final int ic_launcher_copy=0x7f020056;
-        public static final int ics_check=0x7f020057;
-        public static final int ics_discard=0x7f020058;
-        public static final int ics_edit=0x7f020059;
-        public static final int ics_menu_discard=0x7f02005a;
-        public static final int ics_menu_edit=0x7f02005b;
-        public static final int ics_new=0x7f02005c;
-        public static final int ics_not_important=0x7f02005d;
-        public static final int ics_rate_important=0x7f02005e;
-        public static final int ics_save=0x7f02005f;
-        public static final int ics_share=0x7f020060;
-        public static final int pattern=0x7f020061;
-        public static final int pattern_bg=0x7f020062;
-        public static final int pattern_blue=0x7f020063;
-        public static final int small_delete=0x7f020064;
-        public static final int small_edit=0x7f020065;
+        public static final int ic_launcher_small=0x7f020057;
+        public static final int ics_check=0x7f020058;
+        public static final int ics_discard=0x7f020059;
+        public static final int ics_edit=0x7f02005a;
+        public static final int ics_menu_discard=0x7f02005b;
+        public static final int ics_menu_edit=0x7f02005c;
+        public static final int ics_new=0x7f02005d;
+        public static final int ics_not_important=0x7f02005e;
+        public static final int ics_rate_important=0x7f02005f;
+        public static final int ics_save=0x7f020060;
+        public static final int ics_share=0x7f020061;
+        public static final int pattern=0x7f020062;
+        public static final int pattern_bg=0x7f020063;
+        public static final int pattern_blue=0x7f020064;
+        public static final int small_delete=0x7f020065;
+        public static final int small_edit=0x7f020066;
+        public static final int widget_background=0x7f020067;
+        public static final int widget_left_arrow=0x7f020068;
+        public static final int widget_right_arrow=0x7f020069;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050022;
@@ -831,27 +835,34 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
+        public static final int addMemoButton=0x7f050032;
+        public static final int appButton=0x7f050030;
+        public static final int arrowLayout=0x7f050034;
         public static final int dateTextView=0x7f05002c;
         public static final int dateView=0x7f05002d;
         public static final int disableHome=0x7f050009;
-        public static final int editContent=0x7f050031;
-        public static final int editTitle=0x7f050030;
+        public static final int editContent=0x7f050038;
+        public static final int editTitle=0x7f050037;
         public static final int empty=0x7f050029;
         public static final int homeAsUp=0x7f050006;
         public static final int importantButton=0x7f05002a;
+        public static final int leftArrow=0x7f050035;
         public static final int listMode=0x7f050002;
+        public static final int memoContentView=0x7f050033;
+        public static final int memoTitleView=0x7f050031;
         public static final int memoView=0x7f05002f;
-        public static final int menu_add=0x7f050032;
-        public static final int menu_bug_report=0x7f050036;
-        public static final int menu_delete=0x7f050038;
-        public static final int menu_delete_all_memo=0x7f050034;
-        public static final int menu_edit=0x7f050037;
-        public static final int menu_save=0x7f05003a;
-        public static final int menu_setting=0x7f050035;
-        public static final int menu_share=0x7f050039;
-        public static final int menu_sorting=0x7f050033;
+        public static final int menu_add=0x7f050039;
+        public static final int menu_bug_report=0x7f05003d;
+        public static final int menu_delete=0x7f05003f;
+        public static final int menu_delete_all_memo=0x7f05003b;
+        public static final int menu_edit=0x7f05003e;
+        public static final int menu_save=0x7f050041;
+        public static final int menu_setting=0x7f05003c;
+        public static final int menu_share=0x7f050040;
+        public static final int menu_sorting=0x7f05003a;
         public static final int normal=0x7f050001;
         public static final int note_list_view=0x7f050028;
+        public static final int rightArrow=0x7f050036;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
@@ -891,7 +902,8 @@ containing a value of this type.
         public static final int sherlock_spinner_dropdown_item=0x7f030016;
         public static final int sherlock_spinner_item=0x7f030017;
         public static final int view_memo=0x7f030018;
-        public static final int write_memo=0x7f030019;
+        public static final int widget_layout=0x7f030019;
+        public static final int write_memo=0x7f03001a;
     }
     public static final class menu {
         public static final int main_menu=0x7f0c0000;
@@ -942,15 +954,20 @@ containing a value of this type.
         public static final int delete_all=0x7f0a0013;
         public static final int edit_label=0x7f0a001c;
         public static final int empty_list=0x7f0a0014;
+        public static final int empty_memo_content=0x7f0a002e;
+        public static final int empty_memo_title=0x7f0a002d;
+        public static final int first_memo=0x7f0a0030;
         public static final int hello=0x7f0a000a;
         public static final int hint_memo=0x7f0a001b;
         public static final int hint_title=0x7f0a001a;
+        public static final int last_memo=0x7f0a002f;
         public static final int menu_bug_report=0x7f0a0019;
         public static final int menu_delete=0x7f0a0017;
         public static final int menu_edit=0x7f0a0018;
         public static final int menu_share=0x7f0a001f;
         public static final int menu_sorting=0x7f0a000e;
         public static final int no_title=0x7f0a001e;
+        public static final int saved=0x7f0a0031;
         public static final int setting=0x7f0a0012;
         public static final int setting_category=0x7f0a0029;
         public static final int setting_summary_agree=0x7f0a002b;
@@ -1057,7 +1074,8 @@ containing a value of this type.
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0b0032;
     }
     public static final class xml {
-        public static final int setting=0x7f040000;
+        public static final int mywidget=0x7f040000;
+        public static final int setting=0x7f040001;
     }
     public static final class styleable {
         /**  Attributes used to style the Action Bar. 

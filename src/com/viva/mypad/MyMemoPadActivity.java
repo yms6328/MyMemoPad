@@ -29,6 +29,8 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
     private final int INSERT_OK = 0;
     private final int UPDATE_MESSAGE = 100;
     private final int DELETE_MESSAGE = 200;
+    private final String DELETED_MEMO = "com.viva.mypad.DELETED_MEMO";
+    private final String DELETED_ALL_MEMO = "com.viva.mypad.DELETED_ALL_MEMO";
 
     private DBAdapter mDbAdapter;
     private ListView mMemoListView;
@@ -105,7 +107,7 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
                     mEmptyView.setVisibility(View.VISIBLE);
                 break;
             }
-        } 
+        }
     };
 
     public void loadData()
@@ -183,6 +185,7 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
         if (mSwipeDetector.swipeDetected())
         {
             mDbAdapter.deleteMemo(mMemoList.get(position).getMemoId());
+            sendBroadcast(new Intent(DELETED_MEMO));
             loadData();
             mHandler.sendEmptyMessage(UPDATE_MESSAGE);
         }
@@ -204,6 +207,7 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
             public void onClick(DialogInterface dialog, int id)
             {
                 mDbAdapter.deleteAllMemo();
+                sendBroadcast(new Intent(DELETED_ALL_MEMO));
                 dialog.dismiss();
                 loadData();
                 mHandler.sendEmptyMessage(DELETE_MESSAGE);

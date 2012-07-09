@@ -98,6 +98,7 @@ public class ViewMemoActivity extends SherlockActivity implements OnClickListene
                 intent = new Intent(this, MyMemoPadActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                this.finish();
             break;
 
             case R.id.menu_edit:

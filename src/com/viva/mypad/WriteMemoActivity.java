@@ -19,6 +19,8 @@ import com.viva.mypad.Util.Util;
 
 public class WriteMemoActivity extends SherlockActivity implements OnClickListener
 {
+    private static final String ADDED_MEMO = "com.viva.mypad.ADDED_MEMO";
+
     private ActionBar mActionBar;
     private String mNow;
     private TextView mDateView;
@@ -98,6 +100,7 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
                 intent = new Intent(this, MyMemoPadActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                this.finish();
             break;
 
             case R.id.menu_save:
@@ -108,6 +111,8 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
                 else
                 {
                     saveMemo();
+                    Toast.makeText(this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
+                    sendBroadcast(new Intent(ADDED_MEMO));
                     intent = new Intent(this, ViewMemoActivity.class);
                     intent.putExtra("memoid", mMemoId);
                     startActivity(intent);
@@ -127,7 +132,7 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
         }
         else
         {
-            mMemoId = mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow, 0);
+            mMemoId = mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow, mImportantNumber);
         }
 
         //this.setResult(RESULT_OK, null);

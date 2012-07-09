@@ -18,13 +18,11 @@ public class MemoArrayAdapter extends BaseAdapter
 {
     private ArrayList<MemoItem> mMemoList;
     private LayoutInflater mLayoutInflater;
-    private Context mContext;
     private boolean mIsImportant;
     private DBAdapter mDbAdapter;
 
     public MemoArrayAdapter(Context ctx, ArrayList<MemoItem> memoList, DBAdapter adapter)
     {
-        mContext = ctx;
         mIsImportant = false;
         mMemoList = memoList;
         mLayoutInflater = LayoutInflater.from(ctx);

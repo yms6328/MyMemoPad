@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.viva.mypad.Constants.Constants.MemoConst;
 import com.viva.mypad.DB.DBHelper;
@@ -41,7 +40,6 @@ public class DBAdapter
 
     public long insertMemo(String title, String contents, String date, int isImportant)
     {
-        Log.e("MYMEMOPAD------", title + ", " + contents + ", " + date);
         ContentValues values = new ContentValues();
         values.put(MemoConst.COL_TITLE, title);
         values.put(MemoConst.COL_CONTENTS, contents);

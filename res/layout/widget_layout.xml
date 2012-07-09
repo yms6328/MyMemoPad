@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_background" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/appButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher_small" />
+
+        <TextView
+            android:id="@+id/memoTitleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:textSize="18dp"
+            android:textColor="#3a3a3a"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/addMemoButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/ics_new" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/memoContentView"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#3a3a3a"
+        android:textSize="15dp"/>
+
+    <RelativeLayout
+        android:id="@+id/arrowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp">
+        <Button
+            android:id="@+id/leftArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_left_arrow"/>
+
+        <Button
+            android:id="@+id/rightArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/widget_right_arrow" />
+
+    </RelativeLayout>
+</LinearLayout>
