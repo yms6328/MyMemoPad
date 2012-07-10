@@ -217,6 +217,8 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
                     String filePath = Util.writeLog(this);
                     intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
+                    String[] email = {"jag9123@gmail.com"};
+                    intent.putExtra(Intent.EXTRA_EMAIL, email);
                     intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mail_title));
                     intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_form));
                     intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
