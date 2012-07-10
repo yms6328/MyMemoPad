@@ -2,33 +2,38 @@
 <resources>
 
     <string name="hello">Hello World, MyMemoPadActivity!</string>
-    <string name="app_name">MyMemoPad</string>
-    <string name="actionbar_title">Memo List</string>
+    <string name="app_name">My MemoPad</string>
+    <string name="actionbar_title">메모 리스트</string>
     <string name="create_db">Create Database</string>
-    <string name="menu_sorting">Sorting</string>
-    <string name="sorting_important">Sort by Important</string>
-    <string name="sorting_date">Sort by date</string>
-    <string name="sorting_title">Sort by title</string>
-    <string name="setting">Setting</string>
-    <string name="delete_all">Delete All Memo</string>
-    <string name="empty_list">Empty List</string>
-    <string name="add_memo">Add</string>
-    <string name="check_memo">Check</string>
-    <string name="menu_delete">Delete</string>
-    <string name="menu_edit">Edit</string>
+    <string name="menu_sorting">정렬</string>
+    <string name="sorting_important">중요도 기준</string>
+    <string name="sorting_date">날짜 기준</string>
+    <string name="sorting_title">제목 기준</string>
+    <string name="setting">설정</string>
+    <string name="delete_all">전체 삭제</string>
+    <string name="empty_list">메모가 없습니다!</string>
+    <string name="add_memo">메모 추가</string>
+    <string name="check_memo">체크</string>
+    <string name="menu_delete">삭제</string>
+    <string name="menu_edit">수정</string>
     <string name="menu_bug_report">Bug Report</string>
-    <string name="hint_title">Title</string>
-    <string name="hint_memo">Write Memo</string>
-    <string name="edit_label">Edit Memo</string>
-    <string name="view_label">View Memo</string>
-    <string name="no_title">제목 없음</string>
-    <string name="menu_share">Share</string>
+    <string name="hint_title">메모 제목</string>
+    <string name="hint_memo">메모를 작성하세요!</string>
+    <string name="context_menu_title">메뉴 수정/삭제</string>
+    <string name="edit_label">메모 수정</string>
+    <string name="view_label">메모 보기</string>
+    <string name="no_title">(제목 없음)</string>
+    <string name="no_memo">(내용 없음)</string>
+    <string name="menu_share">공유</string>
+    <string name="ok">확인</string>
+    <string name="mail_title">[MyMemoPad] Bug Report</string>
+    <string name="mail_form">간단한 사용 상황 및 에러 내용을 작성해주세요. </string>
 
-    <string name="alert_delete_title">Delete All?</string>
-    <string name="alert_delete_all_message">All memo will be deleted.</string>
+    <string name="alert_delete_title">전체 삭제</string>
+    <string name="alert_delete_all_message">모든 메모를 삭제하시겠습니까?</string>
     <string name="alert_delete_message">One memo will be deleted.</string>
-    <string name="alert_delete_confirm">Delete</string>
-    <string name="alert_delete_cancel">Cancel</string>
+    <string name="alert_delete_confirm">삭제</string>
+    <string name="alert_delete_cancel">취소</string>
 
     <string name="share_title">[MyMemopad]</string>
     <string name="share_message">(From MyMemopad)</string>
@@ -48,4 +53,12 @@
     <string name="first_memo">첫 번째 메모입니다.</string>
 
     <string name="saved">저장되었습니다.</string>
+    <string name="notify_log">로그 수집 안내</string>
+    <string name="notify">본 어플리케이션은 베타버전입니다. 
+        어플 사용 중 에러가 발생할 경우(ex. 강제 종료, 버그) 메뉴->Bug Report를 통해 
+        버그 발생 시점의 스마트폰 로그를 제 메일로 보내도록 되어 있습니다.
+        로그에는 여러분의 스마트폰 사용 정보가 기록될 수 있으므로
+        원치 않으신다면 설정에서 로그 수집 동의에 체크를 해제하시면 됩니다.
+        이 경우 Bug Report시에 저에게 어떤 상황에 어떤 에러가 발생했는지를 반드시 적어주세요!
+        무보수로 테스트에 참여해주시는 여러분 진심으로 감사합니다.</string>
 </resources>

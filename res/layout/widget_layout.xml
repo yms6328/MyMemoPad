@@ -35,16 +35,16 @@
             android:layout_height="28dp"
             android:background="@drawable/ics_new" />
     </LinearLayout>
-
+
     <TextView
         android:id="@+id/memoContentView"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="86dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="10dp"
         android:textColor="#3a3a3a"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
 
     <RelativeLayout
         android:id="@+id/arrowLayout"
@@ -56,17 +56,27 @@
         android:layout_marginBottom="10dp">
         <Button
             android:id="@+id/leftArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@drawable/widget_left_arrow"/>
 
         <Button
             android:id="@+id/rightArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/widget_right_arrow" />
+
+        <TextView
+            android:id="@+id/memoDateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/leftArrow"
+            android:layout_alignBottom="@+id/leftArrow"
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp"
+            android:textColor="#3a3a3a" />
 
     </RelativeLayout>
 </LinearLayout>

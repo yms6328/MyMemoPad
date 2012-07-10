@@ -72,12 +72,14 @@ public class MemoArrayAdapter extends BaseAdapter
                     v.setBackgroundResource(R.drawable.ics_not_important);
                     mIsImportant = false;
                     mDbAdapter.updateImportant(mMemoList.get(position).getMemoId(), 0);
+                    mMemoList.get(position).setImportant(0);
                 }
                 else
                 {
                     v.setBackgroundResource(R.drawable.ics_rate_important);
                     mIsImportant = true;
                     mDbAdapter.updateImportant(mMemoList.get(position).getMemoId(), 1);
+                    mMemoList.get(position).setImportant(1);
                 }
             }
         });

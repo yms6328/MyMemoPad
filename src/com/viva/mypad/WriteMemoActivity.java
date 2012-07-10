@@ -1,8 +1,11 @@
 package com.viva.mypad;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,12 +34,15 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
     private long mMemoId;
     private boolean mIsImportant;
     private int mImportantNumber;
+    private SharedPreferences mSharedPref;
+    private boolean mCollectLog;
 
     public void onCreate(Bundle saveInstanceState)
     {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.write_memo);
 
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         mDbAdapter = new DBAdapter(this);
         mDbAdapter.open();
 
@@ -117,6 +123,33 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
                     intent.putExtra("memoid", mMemoId);
                     startActivity(intent);
                     this.finish();
+                }
+            break;
+
+            case R.id.menu_setting:
+                intent = new Intent(this, SettingActivity.class);
+                startActivity(intent);
+            break;
+
+            case R.id.menu_bug_report:
+                mCollectLog = mSharedPref.getBoolean("log_collect", false);
+                if(mCollectLog)
+                {
+                    String filePath = Util.writeLog(this);
+                    intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mail_title));
+                    intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_form));
+                    intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
+                    startActivity(intent);
+                }
+                else
+                {
+                    intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "[" + Util.getNowDateTime() + "] " + getResources().getString(R.string.mail_title));
+                    intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_form));
+                    startActivity(intent);
                 }
             break;
         }

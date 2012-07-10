@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 public class SettingActivity extends PreferenceActivity implements OnPreferenceChangeListener
 {
     private CheckBoxPreference mAgreePref;
+    private SharedPreferences mSharedPref; 
 
     @SuppressWarnings("deprecation")
     public void onCreate(Bundle saveInstanceState)
@@ -24,8 +25,8 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
     public void onResume()
     {
         super.onResume();
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isAgree = sharedPref.getBoolean("log_collect", false);
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isAgree = mSharedPref.getBoolean("log_collect", false);
         mAgreePref.setChecked(isAgree);
 
         if(isAgree)
@@ -45,6 +46,7 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
             if((Boolean)newValue)
             {
                 preference.setSummary(getResources().getString(R.string.setting_summary_agree));
+                
             }
             else
             {

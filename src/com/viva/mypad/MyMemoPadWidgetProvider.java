@@ -73,6 +73,7 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
             intent.putExtra("memoid", id);
             view.setTextViewText(R.id.memoTitleView, cursor.getString(1));
             view.setTextViewText(R.id.memoContentView, cursor.getString(2));
+            view.setTextViewText(R.id.memoDateView, cursor.getString(3));
 
             view.setOnClickPendingIntent(R.id.memoTitleView, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
             view.setOnClickPendingIntent(R.id.memoContentView, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
@@ -203,7 +204,16 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
     {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         views.setTextViewText(R.id.memoTitleView, c.getString(1));
-        views.setTextViewText(R.id.memoContentView, c.getString(2));
+        if(c.getString(2).equals(""))
+        {
+            views.setTextViewText(R.id.memoContentView, context.getResources().getString(R.string.no_memo));
+        }
+        else
+        {
+            views.setTextViewText(R.id.memoContentView, c.getString(2));
+        }
+
+        views.setTextViewText(R.id.memoDateView, c.getString(3));
 
         long id = c.getLong(0);
         Intent intent = new Intent(context, ViewMemoActivity.class);
@@ -219,6 +229,7 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         views.setTextViewText(R.id.memoTitleView, context.getResources().getString(R.string.empty_memo_title));
         views.setTextViewText(R.id.memoContentView, context.getResources().getString(R.string.empty_memo_content));
+        views.setTextViewText(R.id.memoDateView, "");
 
         return views;
     }

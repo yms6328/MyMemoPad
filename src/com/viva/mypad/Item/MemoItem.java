@@ -33,4 +33,9 @@ public class MemoItem
     {
         return mIsImportant;
     }
+
+    public void setImportant(int important)
+    {
+        mIsImportant = important;
+    }
 }

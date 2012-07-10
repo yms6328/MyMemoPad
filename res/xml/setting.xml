@@ -5,7 +5,8 @@
         <CheckBoxPreference
             android:key="log_collect"
             android:title="@string/setting_title"
-            android:summary="@string/setting_summary_disagree">
+            android:summary="@string/setting_summary_disagree"
+            android:defaultValue="true">
         </CheckBoxPreference>
     </PreferenceCategory>
 </PreferenceScreen>

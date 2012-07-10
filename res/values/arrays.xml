@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="compare">
+        <item>날짜로 정렬</item>
+        <item>제목으로 정렬</item>
+        <item>중요도로 정렬</item>
+    </string-array>
+</resources>
