@@ -857,12 +857,15 @@ containing a value of this type.
         public static final int memoView=0x7f05002f;
         public static final int menu_add=0x7f05003a;
         public static final int menu_bug_report=0x7f05003e;
-        public static final int menu_delete=0x7f050040;
+        public static final int menu_check=0x7f05003f;
+        public static final int menu_delete=0x7f050043;
         public static final int menu_delete_all_memo=0x7f05003c;
-        public static final int menu_edit=0x7f05003f;
-        public static final int menu_save=0x7f050042;
+        public static final int menu_edit=0x7f050042;
+        public static final int menu_save=0x7f050045;
         public static final int menu_setting=0x7f05003d;
-        public static final int menu_share=0x7f050041;
+        public static final int menu_share=0x7f050044;
+        public static final int menu_sort_date=0x7f050040;
+        public static final int menu_sort_title=0x7f050041;
         public static final int menu_sorting=0x7f05003b;
         public static final int normal=0x7f050001;
         public static final int note_list_view=0x7f050028;
@@ -911,8 +914,9 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main_menu=0x7f0d0000;
-        public static final int view_menu=0x7f0d0001;
-        public static final int write_menu=0x7f0d0002;
+        public static final int menu=0x7f0d0001;
+        public static final int view_menu=0x7f0d0002;
+        public static final int write_menu=0x7f0d0003;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
