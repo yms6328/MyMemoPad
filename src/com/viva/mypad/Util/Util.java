@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 
 public class Util
@@ -83,5 +85,21 @@ public class Util
     public static boolean deleteLogFile()
     {
         return new File(mFilePath).delete();
+    }
+
+    public static String getAppVersion(Context context)
+    {
+        String version = "1.0";
+
+        try
+        {
+            PackageInfo i = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = i.versionName;
+        }
+        catch(NameNotFoundException e)
+        {
+            ;
+        }
+        return version;
     }
 }

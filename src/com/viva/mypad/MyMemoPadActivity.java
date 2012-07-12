@@ -31,6 +31,7 @@ import com.viva.mypad.Adapter.MemoArrayAdapter;
 import com.viva.mypad.Comparator.DateComparator;
 import com.viva.mypad.Comparator.ImportantComparator;
 import com.viva.mypad.Comparator.TitleComparator;
+import com.viva.mypad.Constants.Constants.MemoConst;
 import com.viva.mypad.Item.MemoItem;
 import com.viva.mypad.Util.Util;
 
@@ -39,8 +40,6 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
     private final int INSERT_OK = 0;
     private final int UPDATE_MESSAGE = 100;
     private final int DELETE_ALL_MESSAGE = 200;
-    private final String DELETED_MEMO = "com.viva.mypad.DELETED_MEMO";
-    private final String DELETED_ALL_MEMO = "com.viva.mypad.DELETED_ALL_MEMO";
     private final int MENU_EDIT_ID = 300;
     private final int MENU_DELETE_ID = 400;
 
@@ -60,6 +59,8 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Log.i(MemoConst.TAG, "MyMemopad Main Activity Start!");
+        Log.i(MemoConst.TAG, "Thanks for using this application");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(this.getResources().getString(R.string.actionbar_title));
@@ -216,12 +217,13 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
                 {
                     String filePath = Util.writeLog(this);
                     intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
                     String[] email = {"jag9123@gmail.com"};
                     intent.putExtra(Intent.EXTRA_EMAIL, email);
                     intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mail_title));
                     intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_form));
                     intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
+                    intent.setType("message/rfc882");
+                    Intent.createChooser(intent, getResources().getString(R.string.send_title));
                     startActivity(intent);
                 }
                 else
@@ -320,7 +322,7 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
                 menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
                 index = menuInfo.position;
                 mDbAdapter.deleteMemo(mMemoList.get(index).getMemoId());
-                sendBroadcast(new Intent(DELETED_MEMO));
+                sendBroadcast(new Intent(MemoConst.DELETED_MEMO));
                 loadData();
                 mHandler.sendEmptyMessage(UPDATE_MESSAGE);
             return true;
@@ -338,7 +340,7 @@ public class MyMemoPadActivity extends SherlockActivity implements OnItemClickLi
             public void onClick(DialogInterface dialog, int id)
             {
                 mDbAdapter.deleteAllMemo();
-                sendBroadcast(new Intent(DELETED_ALL_MEMO));
+                sendBroadcast(new Intent(MemoConst.DELETED_ALL_MEMO));
                 dialog.dismiss();
                 loadData();
                 mHandler.sendEmptyMessage(DELETE_ALL_MESSAGE);

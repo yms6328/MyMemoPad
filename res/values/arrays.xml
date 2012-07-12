@@ -5,4 +5,32 @@
         <item>제목으로 정렬</item>
         <item>중요도로 정렬</item>
     </string-array>
+    <string-array name="changelog_group">
+        <item>v1.0.3 (2012. 07. 13)</item>
+        <item>v1.0.2 (2012. 07. 12)</item>
+        <item>v1.0.1 (2012. 07. 11)</item>
+        <item>v1.0 (2012. 07. 10)</item>
+    </string-array>
+
+    <!-- v1.0.3 changelog -->
+    <string-array name="changelog_child003">
+        <item>현재 위젯에 나타난 메모 수정 시 수정 사항이 반영되지 않는 문제 해결</item>
+        <item>Bug Report를 보낼 때 email application 제한</item>
+    </string-array>
+
+    <!-- v1.0.2 changelog -->
+    <string-array name="changelog_child002">
+        <item>24시간마다 위젯 업데이트하도록 업데이트 코드 추가(mywidget.xml)</item>
+    </string-array>
+
+    <!-- v1.0.1 changelog -->
+    <string-array name="changelog_child001">
+        <item>메모 삭제시에 메모 보기 화면에 삭제된 메모가 나타나는 문제 해결</item>
+    </string-array>
+
+    <!-- v1.0 changelog -->
+    <string-array name="changelog_child000">
+        <item>My Memopad Application 배포</item>
+        <item>베타테스트 시작</item>
+    </string-array>
 </resources>

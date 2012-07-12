@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,12 +19,11 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.viva.mypad.Adapter.DBAdapter;
+import com.viva.mypad.Constants.Constants.MemoConst;
 import com.viva.mypad.Util.Util;
 
 public class WriteMemoActivity extends SherlockActivity implements OnClickListener
 {
-    private static final String ADDED_MEMO = "com.viva.mypad.ADDED_MEMO";
-
     private ActionBar mActionBar;
     private String mNow;
     private TextView mDateView;
@@ -41,6 +41,7 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
     {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.write_memo);
+        Log.i(MemoConst.TAG, "Write Memo Activity Start");
 
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         mDbAdapter = new DBAdapter(this);
@@ -118,7 +119,6 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
                 {
                     saveMemo();
                     Toast.makeText(this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
-                    sendBroadcast(new Intent(ADDED_MEMO));
                     intent = new Intent(this, ViewMemoActivity.class);
                     intent.putExtra("memoid", mMemoId);
                     startActivity(intent);
@@ -137,12 +137,13 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
                 {
                     String filePath = Util.writeLog(this);
                     intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
                     String[] email = {"jag9123@gmail.com"};
                     intent.putExtra(Intent.EXTRA_EMAIL, email);
                     intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mail_title));
                     intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_form));
                     intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
+                    intent.setType("message/rfc882");
+                    Intent.createChooser(intent, getResources().getString(R.string.send_title));
                     startActivity(intent);
                 }
                 else
@@ -164,10 +165,14 @@ public class WriteMemoActivity extends SherlockActivity implements OnClickListen
         if(mIsEditMode == 1)
         {
             mDbAdapter.updateMemo(mMemoId, mEditTitle.getText().toString(), mEditContent.getText().toString(), mImportantNumber);
+            Intent intent = new Intent(MemoConst.EDITED_MEMO);
+            intent.putExtra("updated_memoid", mMemoId);
+            sendBroadcast(intent);
         }
         else
         {
             mMemoId = mDbAdapter.insertMemo(mEditTitle.getText().toString(), mEditContent.getText().toString(), mNow, mImportantNumber);
+            sendBroadcast(new Intent(MemoConst.ADDED_MEMO));
         }
 
         //this.setResult(RESULT_OK, null);

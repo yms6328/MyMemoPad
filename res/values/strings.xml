@@ -61,4 +61,19 @@
         원치 않으신다면 설정에서 로그 수집 동의에 체크를 해제하시면 됩니다.
         이 경우 Bug Report시에 저에게 어떤 상황에 어떤 에러가 발생했는지를 반드시 적어주세요!
         무보수로 테스트에 참여해주시는 여러분 진심으로 감사합니다.</string>
+    <string name="send_title">버그리포트 보내기</string>
+
+    <string name="info_category">ABOUT</string>
+    <string name="info_title">개발 정보</string>
+    <string name="info_developer_category">개발자</string>
+    <string name="info_developer">Hyeyeong Ahn (안혜영)</string>
+    <string name="info_developer_summary">jag9123@gmail.com</string>
+    <string name="info_app_version_category">App Version</string>
+    <string name="info_app_version">Version</string>
+    <string name="info_app_version_modified_date">Last Modified: 2012. 07. 13</string>
+    <string name="info_view_changelog">Changelog</string>
+    <string name="info_view_changelog_summary">어플리케이션 변경사항 보기</string>
+    <string name="info_contact_category">문의</string>
+    <string name="info_contact_email">jag9123@gmail.com</string>
+    <string name="info_contact_email_summary">이메일 보내기</string>
 </resources>

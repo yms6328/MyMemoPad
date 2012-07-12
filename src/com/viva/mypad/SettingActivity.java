@@ -1,17 +1,23 @@
 package com.viva.mypad;
 
+import com.viva.mypad.InfoActivity.InformationActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 
-public class SettingActivity extends PreferenceActivity implements OnPreferenceChangeListener
+public class SettingActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener
 {
     private CheckBoxPreference mAgreePref;
-    private SharedPreferences mSharedPref; 
+    private SharedPreferences mSharedPref;
+    private PreferenceScreen mInfoPref;
 
     @SuppressWarnings("deprecation")
     public void onCreate(Bundle saveInstanceState)
@@ -20,6 +26,8 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
         addPreferencesFromResource(R.xml.setting);
         mAgreePref = (CheckBoxPreference)findPreference("log_collect");
         mAgreePref.setOnPreferenceChangeListener(this);
+        mInfoPref = (PreferenceScreen)findPreference("development_info");
+        mInfoPref.setOnPreferenceClickListener(this);
     }
 
     public void onResume()
@@ -50,8 +58,17 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
             }
             else
             {
-            	preference.setSummary(getResources().getString(R.string.setting_summary_disagree));
+                preference.setSummary(getResources().getString(R.string.setting_summary_disagree));
             }
+        }
+        return true;
+    }
+
+    public boolean onPreferenceClick(Preference preference)
+    {
+        if(preference.equals(mInfoPref))
+        {
+            startActivity(new Intent(this, InformationActivity.class));
         }
         return true;
     }

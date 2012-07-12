@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="@string/info_developer_category">
+        <PreferenceScreen
+            android:key="developer"
+            android:title="@string/info_developer"
+            android:summary="@string/info_developer_summary" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/info_app_version_category">
+        <PreferenceScreen 
+            android:key="version"
+            android:title="@string/info_app_version"
+            android:summary="@string/info_app_version_modified_date" />
+        <PreferenceScreen
+            android:key="changelog"
+            android:title="@string/info_view_changelog"
+            android:summary="@string/info_view_changelog_summary" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/info_contact_category">
+        <PreferenceScreen
+            android:key="contact"
+            android:title="@string/info_contact_email"
+            android:summary="@string/info_contact_email_summary" />
+    </PreferenceCategory>
+</PreferenceScreen>

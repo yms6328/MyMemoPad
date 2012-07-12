@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,12 +17,11 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.viva.mypad.Adapter.DBAdapter;
+import com.viva.mypad.Constants.Constants.MemoConst;
 import com.viva.mypad.Util.Util;
 
 public class ViewMemoActivity extends SherlockActivity implements OnClickListener
 {
-    private final String DELETED_MEMO = "com.viva.mypad.DELETED_MEMO";
-
     private long mMemoId;
     private DBAdapter mDbAdapter;
     private boolean mIsImportant;
@@ -35,6 +35,7 @@ public class ViewMemoActivity extends SherlockActivity implements OnClickListene
     {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.view_memo);
+        Log.i(MemoConst.TAG, "View Memo Activity Start");
 
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         mIsImportant = false;
@@ -45,6 +46,7 @@ public class ViewMemoActivity extends SherlockActivity implements OnClickListene
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         mMemoId = getIntent().getExtras().getLong("memoid");
+        Log.i(MemoConst.TAG, "View Memo id:" + mMemoId);
 
         TextView dateView = (TextView)findViewById(R.id.dateView);
         TextView memoView = (TextView)findViewById(R.id.memoView);
@@ -121,7 +123,7 @@ public class ViewMemoActivity extends SherlockActivity implements OnClickListene
 
             case R.id.menu_delete:
                 mDbAdapter.deleteMemo(mMemoId);
-                sendBroadcast(new Intent(DELETED_MEMO));
+                sendBroadcast(new Intent(MemoConst.DELETED_MEMO));
                 intent = new Intent(ViewMemoActivity.this, MyMemoPadActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -147,12 +149,13 @@ public class ViewMemoActivity extends SherlockActivity implements OnClickListene
                 {
                     String filePath = Util.writeLog(this);
                     intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
                     String[] email = {"jag9123@gmail.com"};
                     intent.putExtra(Intent.EXTRA_EMAIL, email);
                     intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mail_title));
                     intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_form));
                     intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
+                    intent.setType("message/rfc882");
+                    Intent.createChooser(intent, getResources().getString(R.string.send_title));
                     startActivity(intent);
                 }
                 else

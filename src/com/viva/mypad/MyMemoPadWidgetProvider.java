@@ -16,14 +16,10 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.viva.mypad.Adapter.DBAdapter;
+import com.viva.mypad.Constants.Constants.MemoConst;
 
 public class MyMemoPadWidgetProvider extends AppWidgetProvider
 {
-    private final String CLICK_NEXT_ACTION = "com.viva.mypad.CLICK_NEXT";
-    private final String CLICK_PREV_ACTION = "com.viva.mypad.CLICK_PREV";
-    private final String ADDED_MEMO = "com.viva.mypad.ADDED_MEMO";
-    private final String DELETED_MEMO = "com.viva.mypad.DELETED_MEMO";
-    private final String DELETED_ALL_MEMO = "com.viva.mypad.DELETED_ALL_MEMO";
     private DBAdapter mDbAdapter;
 
     public void onEnabled(Context context)
@@ -46,6 +42,8 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
 
     private RemoteViews buildViews(Context context)
     {
+        Log.i(MemoConst.TAG, "Update Widget!");
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         Editor edit = sharedPref.edit();
 
@@ -54,6 +52,7 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
         Intent intent = new Intent(context, WriteMemoActivity.class);
         intent.putExtra("editMode", 0);
         view.setOnClickPendingIntent(R.id.addMemoButton, PendingIntent.getActivity(context, 0, intent, 0));
+        int current = sharedPref.getInt("current_memo", 0);
 
         mDbAdapter = new DBAdapter(context);
         mDbAdapter.open();
@@ -66,7 +65,7 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
         }
         else
         {
-            cursor.moveToFirst();
+            cursor.moveToPosition(current);
 
             intent = new Intent(context, ViewMemoActivity.class);
             long id = cursor.getLong(0);
@@ -78,11 +77,11 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
             view.setOnClickPendingIntent(R.id.memoTitleView, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
             view.setOnClickPendingIntent(R.id.memoContentView, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
 
-            view.setOnClickPendingIntent(R.id.rightArrow, PendingIntent.getBroadcast(context, 0, new Intent(CLICK_NEXT_ACTION), PendingIntent.FLAG_UPDATE_CURRENT));
-            view.setOnClickPendingIntent(R.id.leftArrow, PendingIntent.getBroadcast(context, 0, new Intent(CLICK_PREV_ACTION), PendingIntent.FLAG_UPDATE_CURRENT));
+            view.setOnClickPendingIntent(R.id.rightArrow, PendingIntent.getBroadcast(context, 0, new Intent(MemoConst.CLICK_NEXT_ACTION), PendingIntent.FLAG_UPDATE_CURRENT));
+            view.setOnClickPendingIntent(R.id.leftArrow, PendingIntent.getBroadcast(context, 0, new Intent(MemoConst.CLICK_PREV_ACTION), PendingIntent.FLAG_UPDATE_CURRENT));
         }
 
-        edit.putInt("current_memo", 0);
+        edit.putInt("current_memo", current);
         edit.putInt("all_memo", cursor.getCount());
         edit.commit();
 
@@ -103,9 +102,7 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
         int currentMemo = sharedPref.getInt("current_memo", 0);
         int allMemo = cursor.getCount();
 
-        Log.e("MYMEMOPAD", "current: " + currentMemo + " all: " + allMemo);
-
-        if(CLICK_NEXT_ACTION.equals(getIntent.getAction()))
+        if(MemoConst.CLICK_NEXT_ACTION.equals(getIntent.getAction()))
         {
             if(allMemo == 0)
             {
@@ -125,12 +122,11 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
                     update(context, updateView(context, cursor));
                 }
 
-                cursor.close();
                 editor.putInt("current_memo", currentMemo);
                 editor.commit();
             }
         }
-        else if(CLICK_PREV_ACTION.equals(getIntent.getAction()))
+        else if(MemoConst.CLICK_PREV_ACTION.equals(getIntent.getAction()))
         {
             if(allMemo == 0)
             {
@@ -150,12 +146,11 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
                     update(context, updateView(context, cursor));
                 }
 
-                cursor.close();
                 editor.putInt("current_memo", currentMemo);
                 editor.commit();
             }
         }
-        else if(ADDED_MEMO.equals(getIntent.getAction()))
+        else if(MemoConst.ADDED_MEMO.equals(getIntent.getAction()))
         {
             if(allMemo == 1)
             {
@@ -168,7 +163,17 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
             editor.putInt("current_memo", currentMemo);
             editor.commit();
         }
-        else if(DELETED_MEMO.equals(getIntent.getAction()))
+        else if(MemoConst.EDITED_MEMO.equals(getIntent.getAction()))
+        {
+            long updatedMemoId = getIntent.getExtras().getLong("updated_memoid");
+            cursor.moveToPosition(currentMemo);
+
+            if(updatedMemoId == cursor.getLong(0))
+            {
+                update(context, updateView(context, cursor));
+            }
+        }
+        else if(MemoConst.DELETED_MEMO.equals(getIntent.getAction()))
         {
             if(allMemo != 0 && currentMemo == allMemo)
             {
@@ -183,9 +188,8 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
             editor.putInt("all_memo", allMemo);
             editor.putInt("current_memo", currentMemo);
             editor.commit();
-            cursor.close();
         }
-        else if(DELETED_ALL_MEMO.equals(getIntent.getAction()))
+        else if(MemoConst.DELETED_ALL_MEMO.equals(getIntent.getAction()))
         {
         	update(context, updateEmptyView(context));
             currentMemo = 0;
@@ -197,6 +201,8 @@ public class MyMemoPadWidgetProvider extends AppWidgetProvider
         {
             super.onReceive(context, getIntent);
         }
+        Log.i(MemoConst.TAG, "current: " + currentMemo + " all: " + allMemo);
+        cursor.close();
         dbAdapter.close();
     }
 

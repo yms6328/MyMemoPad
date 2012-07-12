@@ -24,5 +24,14 @@ public final class Constants implements BaseColumns
         public static final String COL_CONTENTS = "contents";
         public static final String COL_DATE = "date";
         public static final String COL_IMPORTANT = "important";
+
+        public static final String CLICK_NEXT_ACTION = "com.viva.mypad.CLICK_NEXT";
+        public static final String CLICK_PREV_ACTION = "com.viva.mypad.CLICK_PREV";
+        public static final String ADDED_MEMO = "com.viva.mypad.ADDED_MEMO";
+        public static final String EDITED_MEMO = "com.viva.mypad.EDITED_MEMO";
+        public static final String DELETED_MEMO = "com.viva.mypad.DELETED_MEMO";
+        public static final String DELETED_ALL_MEMO = "com.viva.mypad.DELETED_ALL_MEMO";
+
+        public static final String TAG = "[MyMemopad]";
     }
 }

@@ -9,4 +9,11 @@
             android:defaultValue="true">
         </CheckBoxPreference>
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/info_category">
+        <PreferenceScreen
+            android:key="development_info"
+            android:title="@string/info_title">
+        </PreferenceScreen>
+    </PreferenceCategory>
 </PreferenceScreen>
