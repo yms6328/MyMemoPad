@@ -1,7 +1,5 @@
 package com.viva.mypad;
 
-import com.viva.mypad.InfoActivity.InformationActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,11 +11,15 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
+import com.viva.mypad.Util.Util;
+
 public class SettingActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener
 {
     private CheckBoxPreference mAgreePref;
     private SharedPreferences mSharedPref;
     private PreferenceScreen mInfoPref;
+    private PreferenceScreen mVersionPref;
+    private PreferenceScreen mChangeLogPref;
 
     @SuppressWarnings("deprecation")
     public void onCreate(Bundle saveInstanceState)
@@ -26,8 +28,15 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
         addPreferencesFromResource(R.xml.setting);
         mAgreePref = (CheckBoxPreference)findPreference("log_collect");
         mAgreePref.setOnPreferenceChangeListener(this);
+
         mInfoPref = (PreferenceScreen)findPreference("development_info");
         mInfoPref.setOnPreferenceClickListener(this);
+
+        mVersionPref = (PreferenceScreen)findPreference("version");
+        mVersionPref.setTitle(getResources().getString(R.string.info_app_version) + " " + Util.getAppVersion(this));
+
+        mChangeLogPref = (PreferenceScreen)findPreference("changelog");
+        mChangeLogPref.setOnPreferenceClickListener(this);
     }
 
     public void onResume()
@@ -54,7 +63,6 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
             if((Boolean)newValue)
             {
                 preference.setSummary(getResources().getString(R.string.setting_summary_agree));
-                
             }
             else
             {
@@ -66,9 +74,9 @@ public class SettingActivity extends PreferenceActivity implements OnPreferenceC
 
     public boolean onPreferenceClick(Preference preference)
     {
-        if(preference.equals(mInfoPref))
+        if(preference.equals(mChangeLogPref))
         {
-            startActivity(new Intent(this, InformationActivity.class));
+            startActivity(new Intent(this, ChangeLogActivity.class));
         }
         return true;
     }

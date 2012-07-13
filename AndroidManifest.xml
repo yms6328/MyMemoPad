@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.viva.mypad"
     android:versionCode="1"
-    android:versionName="1.0.4" >
+    android:versionName="1.0.3" >
 
     <uses-sdk android:minSdkVersion="10" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -55,7 +55,7 @@
             android:label="@string/info_category"
             android:theme="@style/Theme.Sherlock.Light" />
         <activity
-            android:name=".InfoActivity.ChangeLogActivity"
+            android:name=".ChangeLogActivity"
             android:label="@string/info_view_changelog"
             android:theme="@style/Theme.Sherlock.Light" />
     </application>

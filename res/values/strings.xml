@@ -65,7 +65,7 @@
 
     <string name="info_category">ABOUT</string>
     <string name="info_title">개발 정보</string>
-    <string name="info_developer_category">개발자</string>
+    <string name="info_developer_category">Developer / Contact</string>
     <string name="info_developer">Hyeyeong Ahn (안혜영)</string>
     <string name="info_developer_summary">jag9123@gmail.com</string>
     <string name="info_app_version_category">App Version</string>
@@ -76,4 +76,5 @@
     <string name="info_contact_category">문의</string>
     <string name="info_contact_email">jag9123@gmail.com</string>
     <string name="info_contact_email_summary">이메일 보내기</string>
+    <string name="info_version_status">Latest Version:</string>
 </resources>

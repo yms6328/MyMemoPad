@@ -9,12 +9,14 @@
         <item>v1.0.3 (2012. 07. 13)</item>
         <item>v1.0.2 (2012. 07. 12)</item>
         <item>v1.0.1 (2012. 07. 11)</item>
-        <item>v1.0 (2012. 07. 10)</item>
+        <item>v1.0.0 (2012. 07. 10)</item>
     </string-array>
+
+    <!-- Latest Version -->
 
     <!-- v1.0.3 changelog -->
     <string-array name="changelog_child003">
-        <item>현재 위젯에 나타난 메모 수정 시 수정 사항이 반영되지 않는 문제 해결</item>
+        <item>현재 위젯에 나타난 메모 수정 시 수정 사항이 반영되지 않는 문제 해결 (제보: 정다운님)</item>
         <item>Bug Report를 보낼 때 email application 제한</item>
     </string-array>
 
